@@ -57,11 +57,6 @@ boolean Adafruit_ADT7410::begin(uint8_t addr) {
   Wire.endTransmission();
 
   delay(10);
-  // a couple dummy reads to get it going
-  readTempC();
-  delay(10);
-  readTempC();
-  delay(100);
 
   return true;
 }
@@ -81,7 +76,7 @@ float Adafruit_ADT7410::readTempC() {
 }
 
 /*!
- *    @brief  Low level 16 bit write procedures
+ *    @brief  Low level 8 bit write procedures
  *    @param  reg
  *    @param  value
  */
