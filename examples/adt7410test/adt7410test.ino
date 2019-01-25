@@ -2,7 +2,7 @@
 /**************************************************************************/
 /*!
 This is a demo for the Adafruit ADT7410 breakout
-----> http://www.adafruit.com/products/xxxx
+----> http://www.adafruit.com/products/4089
 Adafruit invests time and resources providing this open source code,
 please support Adafruit and open-source hardware by purchasing
 products from Adafruit!

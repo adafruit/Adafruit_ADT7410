@@ -3,8 +3,7 @@ Adafruit_ADT7410 [![Build Status](https://travis-ci.com/adafruit/Adafruit_ADT741
 
 This is the Adafruit ADT7410 Precision I2C Temperature sensor library
 
-Tested and works great with the Adafruit ADT7410 Breakout Board 
-    ------> http://www.adafruit.com/
+Tested and works great with the [Adafruit ADT7410 Breakout Board](http://www.adafruit.com/4089)
 
 This chip uses I2C to communicate, 2 pins are required to interface
 
