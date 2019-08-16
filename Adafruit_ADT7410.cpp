@@ -8,7 +8,7 @@
  * 	I2C Driver for Microchip's ADT7410 I2C Temp sensor
  *
  * 	This is a library for the Adafruit ADT7410 breakout:
- * 	http://www.adafruit.com/products/1782
+ * 	http://www.adafruit.com/products/4089
  *
  * 	Adafruit invests time and resources providing this open source code,
  *  please support Adafruit and open-source hardware by purchasing products from
@@ -71,6 +71,20 @@ float Adafruit_ADT7410::readTempC() {
 
   float temp = (int16_t)t;
   temp /= 128.0;
+
+  return temp;
+}
+
+/*!
+ *   @brief  Reads the 16-bit temperature register and returns the Fahrenheit
+ *           temperature as a float.
+ *   @return Temperature in Fahrenheit.
+ */
+float Adafruit_ADT7410::readTempF() {
+  uint16_t t = read16(ADT7410_REG__ADT7410_TEMPMSB);
+
+  float temp = (int16_t)t;
+  temp = temp * 0.0140625 /*( 1.0/128.0 * 9.0/5.0 )*/ + 32.0;
 
   return temp;
 }
