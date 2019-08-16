@@ -38,13 +38,56 @@
 Adafruit_ADT7410::Adafruit_ADT7410() {}
 
 /*!
- *    @brief  Setups the HW
+ *    @brief  Setups the HW with default address and Wire object
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_ADT7410::begin() {
+  _i2caddr = ADT7410_I2CADDR_DEFAULT;
+  _wire = &Wire;
+  return init();
+}
+
+/*!
+ *    @brief  Setups the HW with default address
+ *    @param  *theWire
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_ADT7410::begin(TwoWire *wire) {
+  _i2caddr = ADT7410_I2CADDR_DEFAULT;
+  _wire = wire;
+  return init();
+}
+
+/*!
+ *    @brief  Setups the HW with default Wire object
  *    @param  addr
  *    @return True if initialization was successful, otherwise false.
  */
-boolean Adafruit_ADT7410::begin(uint8_t addr) {
+bool Adafruit_ADT7410::begin(uint8_t addr) {
   _i2caddr = addr;
-  Wire.begin();
+  _wire = &Wire;
+  return init();
+}
+
+/*!
+ *    @brief  Setups the HW
+ *    @param  addr
+ *    @param  *theWire
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_ADT7410::begin(uint8_t addr, TwoWire *wire) {
+  _i2caddr = addr;
+  _wire = wire;
+  return init();
+}
+
+/*!
+ *    @brief  init function
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_ADT7410::init() {
+  
+  _wire->begin();
 
   uint8_t id = read8(ADT7410_REG__ADT7410_ID) & 0xF8;
   if (id != 0xC8) {
@@ -52,9 +95,13 @@ boolean Adafruit_ADT7410::begin(uint8_t addr) {
   }
 
   // soft reset
-  Wire.beginTransmission(_i2caddr);
-  Wire.write(ADT7410_REG__ADT7410_SWRST);
-  Wire.endTransmission();
+  _wire->beginTransmission(_i2caddr);
+  _wire->write(ADT7410_REG__ADT7410_SWRST);
+  _wire->endTransmission();
+
+  // ADT7410 is 13-bit resolution by default, ensure we enable the 16-bit 
+  // temperature ADC conversion
+  write8(ADT7410_REG__ADT7410_CONFIG, 0x80);
 
   delay(10);
 
@@ -90,15 +137,36 @@ float Adafruit_ADT7410::readTempF() {
 }
 
 /*!
+ *    @brief  Low level 8 bit read procedure
+ *    @param  reg
+ *    @return value
+ */
+uint8_t Adafruit_ADT7410::read8(uint8_t reg) {
+  uint8_t val = 0xFF;
+  uint8_t state;
+
+  _wire->beginTransmission(_i2caddr);
+  _wire->write(reg);
+  state = _wire->endTransmission(false);
+
+  if (0 == state) {
+    _wire->requestFrom(_i2caddr, (uint8_t)2);
+    val = _wire->read();
+  }
+
+  return val;
+}
+
+/*!
  *    @brief  Low level 8 bit write procedures
  *    @param  reg
  *    @param  value
  */
 void Adafruit_ADT7410::write8(uint8_t reg, uint8_t value) {
-  Wire.beginTransmission(_i2caddr);
-  Wire.write((uint8_t)reg);
-  Wire.write((uint8_t)value);
-  Wire.endTransmission();
+  _wire->beginTransmission(_i2caddr);
+  _wire->write(reg);
+  _wire->write(value);
+  _wire->endTransmission();
 }
 
 /*!
@@ -107,30 +175,31 @@ void Adafruit_ADT7410::write8(uint8_t reg, uint8_t value) {
  *    @return value
  */
 uint16_t Adafruit_ADT7410::read16(uint8_t reg) {
-  uint16_t val;
+  uint16_t val = 0xFFFF;
+  uint8_t state;
 
-  Wire.beginTransmission(_i2caddr);
-  Wire.write((uint8_t)reg);
-  Wire.endTransmission(false);
+  _wire->beginTransmission(_i2caddr);
+  _wire->write(reg);
+  state = _wire->endTransmission(false);
 
-  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)2);
-  val = Wire.read();
-  val <<= 8;
-  val |= Wire.read();
+  if (0 == state) {
+    _wire->requestFrom(_i2caddr, (uint8_t)2);
+    val = _wire->read();
+    val <<= 8;
+    val |= _wire->read();
+  }
   return val;
 }
 
-
 /*!
- *    @brief  Low level 8 bit read procedure
+ *    @brief  Low level 16 bit write procedures
  *    @param  reg
- *    @return value
+ *    @param  value
  */
-uint8_t Adafruit_ADT7410::read8(uint8_t reg) {
-  Wire.beginTransmission(_i2caddr);
-  Wire.write((uint8_t)reg);
-  Wire.endTransmission(false);
-
-  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)2);
-  return Wire.read();
+void Adafruit_ADT7410::write16(uint8_t reg, uint16_t value) {
+  _wire->beginTransmission(_i2caddr);
+  _wire->write((uint8_t)reg);
+  _wire->write(value >> 8);
+  _wire->write(value & 0xFF);
+  _wire->endTransmission();
 }
