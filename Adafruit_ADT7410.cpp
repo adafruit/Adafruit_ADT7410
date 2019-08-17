@@ -49,7 +49,7 @@ bool Adafruit_ADT7410::begin() {
 
 /*!
  *    @brief  Setups the HW with default address
- *    @param  *theWire
+ *    @param  *wire
  *    @return True if initialization was successful, otherwise false.
  */
 bool Adafruit_ADT7410::begin(TwoWire *wire) {
@@ -72,7 +72,7 @@ bool Adafruit_ADT7410::begin(uint8_t addr) {
 /*!
  *    @brief  Setups the HW
  *    @param  addr
- *    @param  *theWire
+ *    @param  *wire
  *    @return True if initialization was successful, otherwise false.
  */
 bool Adafruit_ADT7410::begin(uint8_t addr, TwoWire *wire) {
