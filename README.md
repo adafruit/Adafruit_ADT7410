@@ -1,4 +1,6 @@
-Adafruit_ADT7410 [![Build Status](https://github.com/adafruit/Adafruit_ADT7410/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_ADT7410/actions)
+Adafruit_ADT7410 [![Build Status]
+(https://github.com/adafruit/Adafruit_ADT7410/workflows/Arduino%20Library%20CI/badge.svg)]
+(https://github.com/adafruit/Adafruit_ADT7410/actions)
 ================
 
 This is the Adafruit ADT7410 Precision I2C Temperature sensor library
