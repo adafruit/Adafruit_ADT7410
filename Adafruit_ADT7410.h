@@ -24,11 +24,10 @@
 
 #define ADT7410_REG__ADT7410_TEMPMSB 0x0 ///< Temp. value MSB
 #define ADT7410_REG__ADT7410_TEMPLSB 0x1 ///< Temp. value LSB
-#define ADT7410_REG__ADT7410_STATUS  0x2 ///< Status register
-#define ADT7410_REG__ADT7410_CONFIG  0x3 ///< Configuration register
-#define ADT7410_REG__ADT7410_ID      0xB ///< Manufacturer identification
-#define ADT7410_REG__ADT7410_SWRST   0x2F ///< Temperature hysteresis
-
+#define ADT7410_REG__ADT7410_STATUS 0x2  ///< Status register
+#define ADT7410_REG__ADT7410_CONFIG 0x3  ///< Configuration register
+#define ADT7410_REG__ADT7410_ID 0xB      ///< Manufacturer identification
+#define ADT7410_REG__ADT7410_SWRST 0x2F  ///< Temperature hysteresis
 
 /*!
  *    @brief  Class that stores state and functions for interacting with

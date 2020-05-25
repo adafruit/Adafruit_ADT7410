@@ -106,7 +106,6 @@ uint16_t Adafruit_ADT7410::read16(uint8_t reg) {
   return val;
 }
 
-
 /*!
  *    @brief  Low level 8 bit read procedure
  *    @param  reg
