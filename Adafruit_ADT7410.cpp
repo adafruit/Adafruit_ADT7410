@@ -116,6 +116,6 @@ uint8_t Adafruit_ADT7410::read8(uint8_t reg) {
   Wire.write((uint8_t)reg);
   Wire.endTransmission(false);
 
-  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)2);
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)1);
   return Wire.read();
 }
