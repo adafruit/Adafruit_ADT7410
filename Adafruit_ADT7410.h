@@ -18,7 +18,9 @@
 #define _ADAFRUIT_ADT7410_H
 
 #include "Arduino.h"
-#include <Wire.h>
+#include <Adafruit_BusIO_Register.h>
+#include <Adafruit_I2CDevice.h>
+#include <Adafruit_Sensor.h>
 
 #define ADT7410_I2CADDR_DEFAULT 0x48 ///< I2C address
 
@@ -33,17 +35,19 @@
  *    @brief  Class that stores state and functions for interacting with
  *            ADT7410 Temp Sensor
  */
-class Adafruit_ADT7410 {
+class Adafruit_ADT7410 : public Adafruit_Sensor {
 public:
   Adafruit_ADT7410();
-  boolean begin(uint8_t a = ADT7410_I2CADDR_DEFAULT);
+  bool begin(uint8_t a = ADT7410_I2CADDR_DEFAULT, TwoWire *wire = &Wire);
+  bool reset(void);
   float readTempC();
-  void write8(uint8_t reg, uint8_t val);
-  uint16_t read16(uint8_t reg);
-  uint8_t read8(uint8_t reg);
+
+  bool getEvent(sensors_event_t *event);
+  void getSensor(sensor_t *sensor);
 
 private:
-  uint8_t _i2caddr;
+  int32_t _sensorID = 7410;
+  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
 };
 
 #endif
