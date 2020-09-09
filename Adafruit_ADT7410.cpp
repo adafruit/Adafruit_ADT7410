@@ -68,6 +68,10 @@ bool Adafruit_ADT7410::begin(uint8_t addr, TwoWire *wire) {
   return true;
 }
 
+/*!
+ *   @brief  Perform a soft reset
+ *   @return True on success
+ */
 bool Adafruit_ADT7410::reset(void) {
   uint8_t cmd = ADT7410_REG__ADT7410_SWRST;
 
