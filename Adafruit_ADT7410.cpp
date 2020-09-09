@@ -36,7 +36,8 @@ Adafruit_ADT7410::Adafruit_ADT7410(void) {}
 
 /*!
  *    @brief  Setups the HW
- *    @param  addr
+ *    @param  addr The I2C address, defaults to 0x48
+ *    @param  wire The I2C interface, pointer to a TwoWire, defaults to WIre
  *    @return True if initialization was successful, otherwise false.
  */
 bool Adafruit_ADT7410::begin(uint8_t addr, TwoWire *wire) {
