@@ -83,8 +83,8 @@ bool Adafruit_ADT7410::reset(void) {
  *   @return Temperature in Centigrade.
  */
 float Adafruit_ADT7410::readTempC() {
-  Adafruit_BusIO_Register temp_reg =
-    Adafruit_BusIO_Register(i2c_dev, ADT7410_REG__ADT7410_TEMPMSB, 2, MSBFIRST);
+  Adafruit_BusIO_Register temp_reg = Adafruit_BusIO_Register(
+      i2c_dev, ADT7410_REG__ADT7410_TEMPMSB, 2, MSBFIRST);
 
   uint16_t t = temp_reg.read();
 
@@ -93,7 +93,6 @@ float Adafruit_ADT7410::readTempC() {
 
   return temp;
 }
-
 
 /**************************************************************************/
 /*!
@@ -117,7 +116,6 @@ void Adafruit_ADT7410::getSensor(sensor_t *sensor) {
   sensor->min_value = 0;
   sensor->resolution = 0;
 }
-
 
 /**************************************************************************/
 /*!
