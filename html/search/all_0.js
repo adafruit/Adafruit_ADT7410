@@ -10,5 +10,6 @@ var searchData=
   ['adt7410_5freg_5f_5fadt7410_5fswrst',['ADT7410_REG__ADT7410_SWRST',['../_adafruit___a_d_t7410_8h.html#af7d078e15e93899ab1d79a250c05d95e',1,'Adafruit_ADT7410.h']]],
   ['adt7410_5freg_5f_5fadt7410_5ftemplsb',['ADT7410_REG__ADT7410_TEMPLSB',['../_adafruit___a_d_t7410_8h.html#af4c17714d71f77b41b27c9d939ea152f',1,'Adafruit_ADT7410.h']]],
   ['adt7410_5freg_5f_5fadt7410_5ftempmsb',['ADT7410_REG__ADT7410_TEMPMSB',['../_adafruit___a_d_t7410_8h.html#a5b6387a0d9bb44f0c9064fb7b60e1762',1,'Adafruit_ADT7410.h']]],
+  ['adt7410resolution',['adt7410Resolution',['../_adafruit___a_d_t7410_8h.html#a5b2d51fcbadb28062f40bddba9cc763b',1,'Adafruit_ADT7410.h']]],
   ['adafruit_20adt7410_20i2c_20temp_20sensor',['Adafruit ADT7410 I2C Temp Sensor',['../index.html',1,'']]]
 ];
