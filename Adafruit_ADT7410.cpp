@@ -143,3 +143,35 @@ bool Adafruit_ADT7410::getEvent(sensors_event_t *event) {
 
   return true;
 }
+
+/**************************************************************************/
+/*!
+    @brief  Gets the current ADC resolution setting.
+    @returns The current ADC resolution setting.
+*/
+/**************************************************************************/
+adt7410Resolution Adafruit_ADT7410::getResolution() {
+  Adafruit_BusIO_Register config_reg =
+      Adafruit_BusIO_Register(i2c_dev, ADT7410_REG__ADT7410_CONFIG);
+  Adafruit_BusIO_RegisterBits resolution =
+      Adafruit_BusIO_RegisterBits(&config_reg, 1, 0);
+
+  return (adt7410Resolution)resolution.read();
+}
+
+/**************************************************************************/
+/*!
+    @brief  Sets the current ADC resolution setting.
+    @param  res The ADC resolution to set, either ADT7410_13BIT or
+   ADT7410_16BIT.
+    @returns True on successful write otherwise false
+*/
+/**************************************************************************/
+bool Adafruit_ADT7410::setResolution(adt7410Resolution res) {
+  Adafruit_BusIO_Register config_reg =
+      Adafruit_BusIO_Register(i2c_dev, ADT7410_REG__ADT7410_CONFIG);
+  Adafruit_BusIO_RegisterBits resolution =
+      Adafruit_BusIO_RegisterBits(&config_reg, 1, 0);
+
+  return resolution.write(res & 0x01);
+}
