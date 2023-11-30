@@ -154,7 +154,7 @@ adt7410Resolution Adafruit_ADT7410::getResolution() {
   Adafruit_BusIO_Register config_reg =
       Adafruit_BusIO_Register(i2c_dev, ADT7410_REG__ADT7410_CONFIG);
   Adafruit_BusIO_RegisterBits resolution =
-      Adafruit_BusIO_RegisterBits(&config_reg, 1, 0);
+      Adafruit_BusIO_RegisterBits(&config_reg, 1, 7);
 
   return (adt7410Resolution)resolution.read();
 }
@@ -171,7 +171,7 @@ bool Adafruit_ADT7410::setResolution(adt7410Resolution res) {
   Adafruit_BusIO_Register config_reg =
       Adafruit_BusIO_Register(i2c_dev, ADT7410_REG__ADT7410_CONFIG);
   Adafruit_BusIO_RegisterBits resolution =
-      Adafruit_BusIO_RegisterBits(&config_reg, 1, 0);
+      Adafruit_BusIO_RegisterBits(&config_reg, 1, 7);
 
   return resolution.write(res & 0x01);
 }
