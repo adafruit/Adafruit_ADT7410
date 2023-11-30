@@ -31,6 +31,9 @@
 #define ADT7410_REG__ADT7410_ID 0xB      ///< Manufacturer identification
 #define ADT7410_REG__ADT7410_SWRST 0x2F  ///< Temperature hysteresis
 
+/** Options for resolution */
+typedef enum { ADT7410_13BIT = 0, ADT7410_16BIT } adt7410Resolution;
+
 /*!
  *    @brief  Class that stores state and functions for interacting with
  *            ADT7410 Temp Sensor
@@ -44,6 +47,8 @@ public:
 
   bool getEvent(sensors_event_t *event);
   void getSensor(sensor_t *sensor);
+  adt7410Resolution getResolution();
+  bool setResolution(adt7410Resolution res);
 
 private:
   int32_t _sensorID = 7410;
